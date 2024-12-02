@@ -1,40 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// 定义多项式节点的结构体
 typedef struct PolyNode *Polynomial;
 
 struct PolyNode {
-    int coef;
-    int expon;
-    struct PolyNode *next;
+    int coef; // 系数
+    int expon; // 指数
+    struct PolyNode *next; // 指向下一个节点的指针
 };
 
+// 函数声明
 Polynomial PolyCreatePolynomial(int n);
 void PolyPrint(Polynomial p);
 Polynomial PolyAdd(Polynomial p1, Polynomial p2);
 Polynomial Polydiff(Polynomial p1, Polynomial p2);
 void PolyDestroy(Polynomial p);
 
+// 创建多项式
 Polynomial PolyCreatePolynomial(int n){
     Polynomial head, p, tail;
     int coef, expon;
 
-    head = (Polynomial)malloc(sizeof(struct PolyNode));
+    head = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建头节点
     head->next = NULL;
     tail = head;
 
     for(int i = 0; i < n; i++){
-        scanf("%d %d", &coef, &expon);
-        p = (Polynomial)malloc(sizeof(struct PolyNode));
+        scanf("%d %d", &coef, &expon); // 输入系数和指数
+        p = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
         p->coef = coef;
         p->expon = expon;
         p->next = NULL;
-        tail->next = p;
+        tail->next = p; // 将新节点连接到链表
         tail = p;
     }
     return head;
 }
 
+// 打印多项式
 void PolyPrint(Polynomial p){
     Polynomial q = p->next;
     if(q == NULL){
@@ -52,9 +56,10 @@ void PolyPrint(Polynomial p){
     printf("\n");
 }
 
+// 多项式相加
 Polynomial PolyAdd(Polynomial p1, Polynomial p2){
     Polynomial head, p, q, tail;
-    head = (Polynomial)malloc(sizeof(struct PolyNode));
+    head = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建头节点
     head->next = NULL;
     tail = head;
     p = p1->next;
@@ -62,7 +67,7 @@ Polynomial PolyAdd(Polynomial p1, Polynomial p2){
 
     while(p != NULL && q != NULL){
         if(p->expon < q->expon){
-            tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+            tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
             tail->next->coef = p->coef;
             tail->next->expon = p->expon;
             tail->next->next = NULL;
@@ -70,7 +75,7 @@ Polynomial PolyAdd(Polynomial p1, Polynomial p2){
             p = p->next;
         }
         else if(p->expon > q->expon){
-            tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+            tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
             tail->next->coef = q->coef;
             tail->next->expon = q->expon;
             tail->next->next = NULL;
@@ -80,7 +85,7 @@ Polynomial PolyAdd(Polynomial p1, Polynomial p2){
         else{
             int sum = p->coef + q->coef;
             if(sum != 0){
-                tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+                tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
                 tail->next->coef = sum;
                 tail->next->expon = p->expon;
                 tail->next->next = NULL;
@@ -91,7 +96,7 @@ Polynomial PolyAdd(Polynomial p1, Polynomial p2){
         }
     }
     while(p != NULL){
-        tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+        tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
         tail->next->coef = p->coef;
         tail->next->expon = p->expon;
         tail->next->next = NULL;
@@ -99,7 +104,7 @@ Polynomial PolyAdd(Polynomial p1, Polynomial p2){
         p = p->next;
     }
     while(q != NULL){
-        tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+        tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
         tail->next->coef = q->coef;
         tail->next->expon = q->expon;
         tail->next->next = NULL;
@@ -110,9 +115,10 @@ Polynomial PolyAdd(Polynomial p1, Polynomial p2){
     return head;
 }
 
+// 多项式相减
 Polynomial Polydiff(Polynomial p1, Polynomial p2){
     Polynomial head, p, q, tail;
-    head = (Polynomial)malloc(sizeof(struct PolyNode));
+    head = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建头节点
     head->next = NULL;
     tail = head;
     p = p1->next;
@@ -120,7 +126,7 @@ Polynomial Polydiff(Polynomial p1, Polynomial p2){
 
     while(p != NULL && q != NULL){
         if(p->expon < q->expon){
-            tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+            tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
             tail->next->coef = p->coef;
             tail->next->expon = p->expon;
             tail->next->next = NULL;
@@ -128,7 +134,7 @@ Polynomial Polydiff(Polynomial p1, Polynomial p2){
             p = p->next;
         }
         else if(p->expon > q->expon){
-            tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+            tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
             tail->next->coef = -q->coef;
             tail->next->expon = q->expon;
             tail->next->next = NULL;
@@ -138,7 +144,7 @@ Polynomial Polydiff(Polynomial p1, Polynomial p2){
         else{
             int diff = p->coef - q->coef;
             if(diff != 0){
-                tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+                tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
                 tail->next->coef = diff;
                 tail->next->expon = p->expon;
                 tail->next->next = NULL;
@@ -150,7 +156,7 @@ Polynomial Polydiff(Polynomial p1, Polynomial p2){
     }
 
     while(p != NULL){
-        tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+        tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
         tail->next->coef = p->coef;
         tail->next->expon = p->expon;
         tail->next->next = NULL;
@@ -158,7 +164,7 @@ Polynomial Polydiff(Polynomial p1, Polynomial p2){
         p = p->next;
     }
     while(q != NULL){
-        tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+        tail->next = (Polynomial)malloc(sizeof(struct PolyNode)); // 创建新节点
         tail->next->coef = -q->coef;
         tail->next->expon = q->expon;
         tail->next->next = NULL;
@@ -169,21 +175,22 @@ Polynomial Polydiff(Polynomial p1, Polynomial p2){
     return head;
 }
 
+// 销毁多项式
 void PolyDestroy(Polynomial p){
     Polynomial q;
     while(p != NULL){
         q = p;
         p = p->next;
-        free(q);
+        free(q); // 释放内存
     }
 }
 
 int main(){
     int n1, n2;
 
-    scanf("%d", &n1);
+    scanf("%d", &n1); // 输入多项式1的项数
     Polynomial p1 = PolyCreatePolynomial(n1);
-    scanf("%d", &n2);
+    scanf("%d", &n2); // 输入多项式2的项数
     Polynomial p2 = PolyCreatePolynomial(n2);
 
     printf("一元多项式1： ");
