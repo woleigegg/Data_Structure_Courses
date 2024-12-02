@@ -52,6 +52,64 @@ void PolyPrint(Polynomial p){
     }
 }
 
+Polynomial PolyAdd(Polynomial p1, Polynomial p2){
+    Polynomial head, p, q, tail;
+    head = (Polynomial)malloc(sizeof(struct PolyNode));
+    head->next = NULL;
+    tail = head;
+    p = p1->next;
+    q = p2->next;
+
+    while(p != NULL && q != NULL){
+        if(p->expon < q->expon){
+            tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+            tail->next->coef = p->coef;
+            tail->next->expon = p->expon;
+            tail->next->next = NULL;
+            tail = tail->next;
+            p = p->next;
+        }
+        else if(p->expon > q->expon){
+            tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+            tail->next->coef = q->coef;
+            tail->next->expon = q->expon;
+            tail->next->next = NULL;
+            tail = tail->next;
+            q = q->next;
+        }
+        else{
+            int sum = p->coef + q->coef;
+            if(sum != 0){
+                tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+                tail->next->coef = sum;
+                tail->next->expon = p->expon;
+                tail->next->next = NULL;
+                tail = tail->next;
+            }
+            p = p->next;
+            q = q->next;
+        }
+    }
+    while(p != NULL){
+        tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+        tail->next->coef = p->coef;
+        tail->next->expon = p->expon;
+        tail->next->next = NULL;
+        tail = tail->next;
+        p = p->next;
+    }
+    while(q != NULL){
+        tail->next = (Polynomial)malloc(sizeof(struct PolyNode));
+        tail->next->coef = q->coef;
+        tail->next->expon = q->expon;
+        tail->next->next = NULL;
+        tail = tail->next;
+        q = q->next;
+    }
+    tail->next = NULL;
+    return head;
+}
+
 
 int main(){
     int n1, n2;
