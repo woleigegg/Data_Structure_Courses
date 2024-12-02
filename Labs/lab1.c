@@ -3,6 +3,12 @@
 
 typedef struct Polynomial *Polynomial;
 
+Polynomial PolyCreatePolynomial(int n);
+void PolyPrint(Polynomial p);
+Polynomial PolyAdd(Polynomial p1, Polynomial p2);
+Polynomial Polydiff(Polynomial p1, Polynomial p2);
+void PolyDestroy(Polynomial p);
+
 int main(){
     int n1, n2;
 
