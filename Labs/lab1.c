@@ -9,6 +9,12 @@ Polynomial PolyAdd(Polynomial p1, Polynomial p2);
 Polynomial Polydiff(Polynomial p1, Polynomial p2);
 void PolyDestroy(Polynomial p);
 
+typedef struct Polynomial{
+    int coef;
+    int expon;
+    struct Polynomial *next;
+}Polynomial;
+
 int main(){
     int n1, n2;
 
