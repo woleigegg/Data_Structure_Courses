@@ -44,12 +44,12 @@ void PolyPrint(Polynomial p){
     int first = 1;
     while(q != NULL){
         if(q->coef > 0 && !first) printf("+");
-        if(q->coef < 0) printf("-");
         printf("%d", q->coef);
-        if(q->expon > 0) printf("x^%d", q->expon);
+        if(q->expon > 0) printf("x(%d)", q->expon);
         q = q->next;
         first = 0;
     }
+    printf("\n");
 }
 
 Polynomial PolyAdd(Polynomial p1, Polynomial p2){
@@ -182,9 +182,8 @@ int main(){
     int n1, n2;
 
     scanf("%d", &n1);
-    scanf("%d", &n2);
-
     Polynomial p1 = PolyCreatePolynomial(n1);
+    scanf("%d", &n2);
     Polynomial p2 = PolyCreatePolynomial(n2);
 
     printf("一元多项式1： ");
