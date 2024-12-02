@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct Polynomial *Polynomial;
+
 int main(){
     int n1, n2;
 
