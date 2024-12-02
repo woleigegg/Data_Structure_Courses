@@ -169,6 +169,14 @@ Polynomial Polydiff(Polynomial p1, Polynomial p2){
     return head;
 }
 
+void PolyDestroy(Polynomial p){
+    Polynomial q;
+    while(p != NULL){
+        q = p;
+        p = p->next;
+        free(q);
+    }
+}
 
 int main(){
     int n1, n2;
