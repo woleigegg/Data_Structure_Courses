@@ -35,6 +35,24 @@ Polynomial PolyCreatePolynomial(int n){
     return head;
 }
 
+void PolyPrint(Polynomial p){
+    Polynomial q = p->next;
+    if(q == NULL){
+        printf("0");
+        return;
+    }
+    int first = 1;
+    while(q != NULL){
+        if(q->coef > 0 && !first) printf("+");
+        if(q->coef < 0) printf("-");
+        printf("%d", q->coef);
+        if(q->expon > 0) printf("x^%d", q->expon);
+        q = q->next;
+        first = 0;
+    }
+}
+
+
 int main(){
     int n1, n2;
 
