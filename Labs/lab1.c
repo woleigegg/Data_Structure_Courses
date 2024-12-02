@@ -15,6 +15,25 @@ Polynomial PolyAdd(Polynomial p1, Polynomial p2);
 Polynomial Polydiff(Polynomial p1, Polynomial p2);
 void PolyDestroy(Polynomial p);
 
+Polynomial PolyCreatePolynomial(int n){
+    Polynomial head, p, tail;
+    int coef, expon;
+
+    head = (Polynomial)malloc(sizeof(struct PolyNode));
+    head->next = NULL;
+    tail = head;
+
+    for(int i = 0; i < n; i++){
+        scanf("%d %d", &coef, &expon);
+        p = (Polynomial)malloc(sizeof(struct PolyNode));
+        p->coef = coef;
+        p->expon = expon;
+        p->next = NULL;
+        tail->next = p;
+        tail = p;
+    }
+    return head;
+}
 
 int main(){
     int n1, n2;
